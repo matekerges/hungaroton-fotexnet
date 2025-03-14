@@ -13,6 +13,7 @@ const config: Config = {
             colors: {
                 currentColor: "currentColor",
                 transparent: "transparent",
+                fontColor: "oklch(0.278 0.033 256.848)",
             },
             fontFamily: {
                 sans: ["Montserrat", "sans-serif"],

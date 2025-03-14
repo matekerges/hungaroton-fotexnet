@@ -26,6 +26,70 @@ const theme = createTheme({
                         },
                     },
                 },
+                root: {
+                    borderRadius: "0px",
+                },
+            },
+        },
+        MuiToggleButton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                    width: "40px",
+                    '&.Mui-selected': {
+                        backgroundColor: primaryColor,
+                        color: 'white',
+
+                        '&:hover': {
+                            backgroundColor: primaryColor,
+                            color: 'white',
+                        },
+                    },
+                },
+
+            },
+        },
+        MuiSelect: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                },
+            },
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                },
+            },
+        },
+        MuiInputBase: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                },
+
+            },
+        },
+        MuiTooltip: {
+            styleOverrides: {
+                tooltip: {
+                    borderRadius: "0px",
+                },
+            },
+        },
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                },
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "0px",
+                },
             },
         },
     },

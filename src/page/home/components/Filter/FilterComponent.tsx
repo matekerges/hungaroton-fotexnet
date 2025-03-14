@@ -52,7 +52,7 @@ const FilterComponent = ({
 }: FilterComponentProps) => {
 
     return (
-        <div className="pt-10">
+        <div className="md:pt-10">
             <form onSubmit={onSearch} className="flex justify-center flex-wrap gap-4 md:gap-2 w-full">
                 <TextField
                     placeholder="Keresés"
@@ -103,7 +103,7 @@ const FilterComponent = ({
                         <Button
                             type="button"
                             onClick={onDeleteFilters}
-                            disabled={!filters.search && !filters.type}
+                            disabled={!filters.search && !filters.type && !filters.letter}
                         >
                             <Delete />
                         </Button>
@@ -113,7 +113,7 @@ const FilterComponent = ({
                     </Button>
                 </div>
             </form>
-            <div className="overflow-x-auto lg:w-fit lg:mx-auto">
+            <div className="overflow-x-auto xl:w-fit xl:mx-auto">
                 <ToggleButtonGroup
                     onChange={(e, value) => {
                         setLetter(value || "");

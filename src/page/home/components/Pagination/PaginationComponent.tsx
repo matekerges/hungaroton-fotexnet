@@ -22,14 +22,14 @@ const PaginationComponent: React.FC = () => {
 
         if (startPage > 1) {
             pageNumbers.push(
-                <Button key="start-page" onClick={() => setCurrentPage(1)}>
+                <Button key="start-page" onClick={() => setCurrentPage(1)} className="!hidden md:!block">
                     1
                 </Button>
             );
             if (startPage >= 3) {
                 pageNumbers.push(
                     <span
-                        className="h-full mt-0.5 text-[#007799] w-[64px] flex items-center justify-center"
+                        className="h-full mt-0.5 text-[#007799] w-8 pr-5 items-center justify-center hidden md:flex"
                         key="start-ellipsis"
                     >
                         ...
@@ -43,17 +43,26 @@ const PaginationComponent: React.FC = () => {
                     key={i}
                     variant={currentPage === i ? "contained" : "outlined"}
                     onClick={() => setCurrentPage(i)}
+                    className={currentPage !== i ? "!hidden md:!block" : ""}
                 >
                     {i}
                 </Button>
             );
         }
+        pageNumbers.push(
+            <span key="mobile-total-page-number" className="flex items-center md:hidden">
+                <span className="pl-4 pt-1 text-[#007799]">/</span>
+                <Button variant="text" onClick={() => setCurrentPage(totalPages)} className="md:!hidden">
+                    {totalPages}
+                </Button>
+            </span>
+        );
 
         if (endPage < totalPages) {
             if (endPage < totalPages - 1) {
                 pageNumbers.push(
                     <span
-                        className="h-full mt-0.5 text-[#007799] w-[64px] flex items-center justify-center"
+                        className="h-full mt-0.5 text-[#007799] w-8 pl-5 items-center justify-center hidden md:flex"
                         key="end-ellipsis"
                     >
                         ...
@@ -61,7 +70,7 @@ const PaginationComponent: React.FC = () => {
                 );
             }
             pageNumbers.push(
-                <Button onClick={() => setCurrentPage(totalPages)} value={totalPages} key="totalPage">
+                <Button onClick={() => setCurrentPage(totalPages)} value={totalPages} key="totalPage" className="!hidden md:!block">
                     {totalPages}
                 </Button>
             );
