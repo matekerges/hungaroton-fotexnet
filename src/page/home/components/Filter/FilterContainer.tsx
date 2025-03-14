@@ -82,6 +82,12 @@ const FilterContainer = () => {
         setType(newType);
     };
 
+    const handleTextSearchClear = () => {
+        if (searchInputRef.current) {
+            searchInputRef.current.value = "";
+        }
+    };
+
     const handleDeleteFilters = () => {
         if (searchInputRef.current) {
             searchInputRef.current.value = "";
@@ -106,18 +112,6 @@ const FilterContainer = () => {
         });
     };
 
-    const handleTypeSelectChange = (
-        event: React.MouseEvent<HTMLLIElement>,
-        currentType: string,
-        newType: string,
-        onTypeChange: (event: SelectChangeEvent<string>) => void
-    ) => {
-        if (currentType === newType) {
-            event.stopPropagation();
-            onTypeChange({ target: { value: "" } } as SelectChangeEvent<string>);
-        }
-    };
-
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         const newFilters = {
@@ -135,10 +129,11 @@ const FilterContainer = () => {
             letter={letter}
             onDeleteFilters={handleDeleteFilters}
             onSearch={handleSearch}
+            onTextSearchClear={handleTextSearchClear}
             onTypeChange={handleTypeChange}
-            onTypeSelectChange={handleTypeSelectChange}
             searchInputRef={searchInputRef}
             setLetter={handleLetterChange}
+            setType={setType}
             type={type}
             updateFilter={(key, value) => updateFiltersAndUrl({ ...filters, [key]: value })}
         />

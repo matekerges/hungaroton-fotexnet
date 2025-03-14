@@ -41,7 +41,7 @@ export const getArtists = async (
         const response = await fetch(`${BASE_URL}/artists?${params.toString()}`);
 
         if (!response.ok) {
-            throw new Error("Hiba a szerverrel való kommunikációban, kérlek frissítsd az oldalt!");
+            throw new Error("Error with server communication, please refresh the page!");
         }
 
         return response.json();
@@ -49,7 +49,7 @@ export const getArtists = async (
         if (error instanceof Error) {
             setError(error.message);
         } else {
-            setError("Ismeretlen hiba történt!");
+            setError("Unknown error occurred!");
         }
         return null;
     }

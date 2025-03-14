@@ -4,7 +4,7 @@ const SkeletonLoadingComponent = () => {
     return (
         <div className="flex flex-wrap gap-4 justify-center">
             {Array.from({ length: 24 }).map((_, index) => (
-                <Card key={index} className="w-full md:w-[200px] ">
+                <Card key={index} className="w-full md:w-[300px] lg:w-[200px]">
                     <div className="aspect-square">
                         <Skeleton variant="rectangular" className="!h-full !w-full" />
                     </div>

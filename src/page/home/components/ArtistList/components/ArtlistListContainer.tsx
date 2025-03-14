@@ -32,7 +32,7 @@ const ArtistListContainer = () => {
                     setTotalItems(response.pagination.total_items);
                 }
             } catch (error) {
-                setError("Hiba a szerverrel való kommunikációban, kérlek frissítsd az oldalt!");
+                setError("Error with server communication, please refresh the page!");
                 setArtists([]);
             } finally {
                 setLoading(false);
@@ -42,7 +42,7 @@ const ArtistListContainer = () => {
         fetchArtists();
     }, [currentPage, filters, perPage, setError, setTotalItems, setTotalPages]);
 
-    return <ArtistListComponent artists={artists} error={error} loading={loading} totalArtists={totalItems} />;
+    return <ArtistListComponent artists={artists} error={error} filters={filters} loading={loading} totalArtists={totalItems} />;
 };
 
 export default ArtistListContainer;

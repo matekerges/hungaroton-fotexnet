@@ -23,3 +23,9 @@ export interface FilterState {
     search?: string;
     type?: string;
 }
+
+export enum FilterType {
+    COMPOSER = "is_composer",
+    PERFORMER = "is_performer",
+    PRIMARY = "is_primary",
+}

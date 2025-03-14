@@ -11,8 +11,10 @@ import {
     Tooltip,
     ToggleButton,
     ToggleButtonGroup,
+    InputAdornment,
+    IconButton,
 } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Close, Delete } from "@mui/icons-material";
 import { FilterState } from "@/page/home/types";
 
 const letters = [
@@ -25,15 +27,11 @@ interface FilterComponentProps {
     letter: string;
     onDeleteFilters: () => void;
     onSearch: (e: React.FormEvent) => void;
+    onTextSearchClear: () => void;
     onTypeChange: (event: SelectChangeEvent<string>) => void;
-    onTypeSelectChange: (
-        event: React.MouseEvent<HTMLLIElement>,
-        currentType: string,
-        newType: string,
-        onTypeChange: (event: SelectChangeEvent<string>) => void
-    ) => void;
     searchInputRef: React.RefObject<HTMLInputElement | null>;
     setLetter: (letter: string) => void;
+    setType: (type: string) => void;
     type: string;
     updateFilter: (key: keyof FilterState, value: string | boolean | undefined) => void;
 }
@@ -43,47 +41,64 @@ const FilterComponent = ({
     letter,
     onDeleteFilters,
     onSearch,
+    onTextSearchClear,
     onTypeChange,
-    onTypeSelectChange,
     searchInputRef,
     setLetter,
+    setType,
     type,
     updateFilter,
 }: FilterComponentProps) => {
+
 
     return (
         <div className="md:pt-10">
             <form onSubmit={onSearch} className="flex justify-center flex-wrap gap-4 md:gap-2 w-full">
                 <TextField
-                    placeholder="Keresés"
+                    placeholder="Search"
                     inputRef={searchInputRef}
-                    className="w-full md:w-auto"
+                    className="w-full md:w-auto [&>div]:!pr-1"
                     variant="outlined"
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={onTextSearchClear}>
+                                    <Close />
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <FormControl className="w-full md:w-[200px]">
-                    <InputLabel id="type-select-label">Típus</InputLabel>
+                    <InputLabel id="type-select-label">Type</InputLabel>
                     <Select
                         labelId="type-select-label"
                         id="type-select"
                         value={type}
-                        label="Típus"
+                        label="Type"
                         onChange={onTypeChange}
                     >
                         <MenuItem
+                            value=""
+                            onClick={() => setType("")}
+                        >
+                            None
+                        </MenuItem>
+                        <MenuItem
                             value="is_composer"
-                            onClick={(e) => onTypeSelectChange(e, type, "is_composer", onTypeChange)}
+                            onClick={() => setType("is_composer")}
                         >
                             Composer
                         </MenuItem>
                         <MenuItem
                             value="is_performer"
-                            onClick={(e) => onTypeSelectChange(e, type, "is_performer", onTypeChange)}
+                            onClick={() => setType("is_performer")}
                         >
                             Performer
                         </MenuItem>
                         <MenuItem
                             value="is_primary"
-                            onClick={(e) => onTypeSelectChange(e, type, "is_primary", onTypeChange)}
+                            onClick={() => setType("is_primary")}
                         >
                             Primary
                         </MenuItem>
@@ -95,11 +110,11 @@ const FilterComponent = ({
                             checked={filters.include_image}
                             onChange={(e) => updateFilter("include_image", e.target.checked)}
                         />
-                        <span>Album borító</span>
+                        <span>Album cover</span>
                     </label>
                 </div>
                 <div className="flex gap-2">
-                    <Tooltip title="A beállított szűrők törlése" placement="top" arrow enterDelay={700}>
+                    <Tooltip title="Delete filters" placement="top" arrow enterDelay={700}>
                         <Button
                             type="button"
                             onClick={onDeleteFilters}
@@ -109,7 +124,7 @@ const FilterComponent = ({
                         </Button>
                     </Tooltip>
                     <Button type="submit" color="primary" variant="contained">
-                        Keresés
+                        Search
                     </Button>
                 </div>
             </form>

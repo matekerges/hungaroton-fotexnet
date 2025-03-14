@@ -15,7 +15,7 @@ const ArtistCardComponent: React.FC<ArtistCardComponentProps> = ({ artist }) => 
 
     return (
         <>
-            <Card onClick={handleOpen} className="w-full md:w-[200px] hover:opacity-80 cursor-pointer transition-opacity">
+            <Card onClick={handleOpen} className="w-full md:w-[300px] lg:w-[200px] hover:opacity-80 cursor-pointer transition-opacity">
                 {artist.portrait && (
                     <div className="aspect-square">
                         <CardMedia
