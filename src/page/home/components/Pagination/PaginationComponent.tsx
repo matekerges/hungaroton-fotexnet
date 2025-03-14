@@ -26,7 +26,7 @@ const PaginationComponent: React.FC = () => {
                     1
                 </Button>
             );
-            if (startPage >= 2) {
+            if (startPage >= 3) {
                 pageNumbers.push(
                     <span
                         className="h-full mt-0.5 text-[#007799] w-[64px] flex items-center justify-center"
