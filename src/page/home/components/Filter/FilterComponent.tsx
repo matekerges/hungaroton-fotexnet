@@ -31,7 +31,6 @@ interface FilterComponentProps {
     onTypeChange: (event: SelectChangeEvent<string>) => void;
     searchInputRef: React.RefObject<HTMLInputElement | null>;
     setLetter: (letter: string) => void;
-    setType: (type: string) => void;
     type: string;
     updateFilter: (key: keyof FilterState, value: string | boolean | undefined) => void;
 }
@@ -45,7 +44,6 @@ const FilterComponent = ({
     onTypeChange,
     searchInputRef,
     setLetter,
-    setType,
     type,
     updateFilter,
 }: FilterComponentProps) => {
@@ -59,14 +57,16 @@ const FilterComponent = ({
                     inputRef={searchInputRef}
                     className="w-full md:w-auto [&>div]:!pr-1"
                     variant="outlined"
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={onTextSearchClear}>
-                                    <Close />
-                                </IconButton>
-                            </InputAdornment>
-                        ),
+                    slotProps={{
+                        input: {
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton className="group" onClick={onTextSearchClear}>
+                                        <Close className="text-gray-300 group-hover:text-gray-400" />
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        },
                     }}
                 />
                 <FormControl className="w-full md:w-[200px]">
@@ -74,34 +74,14 @@ const FilterComponent = ({
                     <Select
                         labelId="type-select-label"
                         id="type-select"
-                        value={type}
+                        value={type || "all"}
                         label="Type"
                         onChange={onTypeChange}
                     >
-                        <MenuItem
-                            value=""
-                            onClick={() => setType("")}
-                        >
-                            None
-                        </MenuItem>
-                        <MenuItem
-                            value="is_composer"
-                            onClick={() => setType("is_composer")}
-                        >
-                            Composer
-                        </MenuItem>
-                        <MenuItem
-                            value="is_performer"
-                            onClick={() => setType("is_performer")}
-                        >
-                            Performer
-                        </MenuItem>
-                        <MenuItem
-                            value="is_primary"
-                            onClick={() => setType("is_primary")}
-                        >
-                            Primary
-                        </MenuItem>
+                        <MenuItem value="all">All types</MenuItem>
+                        <MenuItem value="is_composer">Composer</MenuItem>
+                        <MenuItem value="is_performer">Performer</MenuItem>
+                        <MenuItem value="is_primary">Primary</MenuItem>
                     </Select>
                 </FormControl>
                 <div className="flex items-center gap-2">

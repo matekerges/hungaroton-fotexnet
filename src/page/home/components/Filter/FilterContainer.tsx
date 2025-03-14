@@ -10,7 +10,7 @@ const STORAGE_KEY = "HUNGAROTON_FILTERS";
 
 const FilterContainer = () => {
     const [letter, setLetter] = useState("");
-    const [type, setType] = useState("");
+    const [type, setType] = useState("all");
 
     const { setFilters } = useFilterContext();
     const { filters } = useFilterContext();
@@ -78,8 +78,7 @@ const FilterContainer = () => {
     }, [searchParams, setFilters]);
 
     const handleTypeChange = (event: SelectChangeEvent<string>) => {
-        const newType = event.target.value;
-        setType(newType);
+        setType(event.target.value === "all" ? "" : event.target.value);
     };
 
     const handleTextSearchClear = () => {
@@ -133,7 +132,6 @@ const FilterContainer = () => {
             onTypeChange={handleTypeChange}
             searchInputRef={searchInputRef}
             setLetter={handleLetterChange}
-            setType={setType}
             type={type}
             updateFilter={(key, value) => updateFiltersAndUrl({ ...filters, [key]: value })}
         />
