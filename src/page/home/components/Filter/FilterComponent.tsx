@@ -8,6 +8,7 @@ import {
     SelectChangeEvent,
     Switch,
     TextField,
+    Tooltip,
     ToggleButton,
     ToggleButtonGroup,
 } from "@mui/material";
@@ -98,12 +99,15 @@ const FilterComponent = ({
                     </label>
                 </div>
                 <div className="flex gap-2">
-                    <Button
-                        type="button"
-                        onClick={onDeleteFilters}
-                    >
-                        <Delete />
-                    </Button>
+                    <Tooltip title="A beállított szűrők törlése" placement="top" arrow enterDelay={700}>
+                        <Button
+                            type="button"
+                            onClick={onDeleteFilters}
+                            disabled={!filters.search && !filters.type}
+                        >
+                            <Delete />
+                        </Button>
+                    </Tooltip>
                     <Button type="submit" color="primary" variant="contained">
                         Keresés
                     </Button>
